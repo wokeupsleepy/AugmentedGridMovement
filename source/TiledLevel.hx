@@ -110,11 +110,16 @@ class TiledLevel extends TiledMap
 		
 		switch (o.type.toLowerCase())
 		{
-			case "player_start":
+			case "player_start": //change to "mover_start" (map.tmx)--> changes starting position, good for SimpleMover
 				// define and set the player 
 				var player = new Player(x, y);
 				state.player = player;
 				state.add(player);
+				
+			case "mover_start": //I added a mover! Hurray!
+				var mover = new SimpleMover(x, y);
+				state.mover = mover;
+				state.add(mover);
 		}
 	}
 	

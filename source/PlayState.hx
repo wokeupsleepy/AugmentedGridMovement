@@ -12,6 +12,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 //does this allows Mario-type scrolling?
 {
 	public var player:Player;
+	public var mover:SimpleMover;
 	private var _level:TiledLevel;
 	private var _howto:FlxText;
 	
@@ -50,6 +51,11 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 			// Resetting the movement flag if the player hits the wall 
 			// is crucial, otherwise you can get stuck in the wall
 			player.moveToNextTile = false;
+		}
+		
+		if (_level.collideWithLevel(mover))
+		{
+			mover.moveToNextTile = false;
 		}
 	}
 	

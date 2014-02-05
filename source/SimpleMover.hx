@@ -5,9 +5,9 @@ import flixel.FlxSprite;
 
 /**
  * ...
- * @author Tom Fang
+ * @author .:Tom Fang:.
  */
-enum MoveDirection
+enum MoverMoveDirection
 {
 	UP;
 	DOWN;
@@ -15,21 +15,27 @@ enum MoveDirection
 	RIGHT;
 }
 
-//SimpleMover is pretty much a copy of Player
-//I want it to go in a single direction by itself from the start without user input
-//boolean constantMove handles this, if true it will sweep back and forth
-//look at the object layer (mover start) in map.tmx using Tiled
-
-class SimpleMover extends FlxSprite 
+class SimpleMover extends FlxSprite
 {
-	
+	/**
+	 * How big the tiles of the tilemap are.
+	 */
 	inline static private var TILE_SIZE:Int = 16;
-	inline static private var MOVEMENT_SPEED:Int = 2;
-	public var moveToNextTile:Bool;
-	private var moveDirection:MoveDirection;
+	/**
+	 * How many pixels to move each frame. Has to be a divider of TILE_SIZE 
+	 * to work as expected (move one block at a time), because we use the
+	 * modulo-operator to check whether the next block has been reached.
+	 */
+	inline static private var MOVEMENT_SPEED:Int = 1; //half-speed of Player
 	
-	public var constantMove:Bool;
-	//Mover won't start until the "M" key is pressed
+	/**
+	 * Flag used to check if char is moving.
+	 */ 
+	public var moveToNextTile:Bool;
+	/**
+	 * Var used to hold moving direction.
+	 */ 
+	private var moveDirection:MoverMoveDirection;
 	
 	public function new(X:Int, Y:Int)
 	{
@@ -37,8 +43,9 @@ class SimpleMover extends FlxSprite
 		super(X, Y);
 		
 		// Make the player graphic.
-		makeGraphic(TILE_SIZE, TILE_SIZE, 0xffc04040);
+		makeGraphic(TILE_SIZE, TILE_SIZE, 0xffff7f50); //for colors: https://github.com/HaxeFlixel/flixel/blob/dev/flixel/util/FlxColor.hx
 	}
+	
 	override public function update():Void
 	{
 		super.update();  
@@ -64,8 +71,20 @@ class SimpleMover extends FlxSprite
 		{
 			moveToNextTile = false;
 		}
-
-	public function moveTo(Direction:MoveDirection):Void
+		
+		// Check for WASD or arrow key presses and move accordingly
+		if (FlxG.keyboard.pressed("N"))
+		{
+			moveTo(MoverMoveDirection.LEFT);
+		}
+		
+		else if (FlxG.keyboard.pressed("M"))
+		{
+			moveTo(MoverMoveDirection.RIGHT);
+		}
+	}
+	
+	public function moveTo(Direction:MoverMoveDirection):Void
 	{
 		// Only change direction if not already moving
 		if (!moveToNextTile)

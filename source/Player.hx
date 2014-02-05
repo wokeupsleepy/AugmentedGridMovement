@@ -43,7 +43,7 @@ class Player extends FlxSprite
 		super(X, Y);
 		
 		// Make the player graphic.
-		makeGraphic(TILE_SIZE, TILE_SIZE, 0xffc04040);
+		makeGraphic(TILE_SIZE, TILE_SIZE, 0xff843179); //for colors: https://github.com/HaxeFlixel/flixel/blob/dev/flixel/util/FlxColor.hx
 	}
 	
 	override public function update():Void
