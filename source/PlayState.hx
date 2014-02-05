@@ -45,6 +45,8 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 	{
 		super.update();
 		
+		FlxG.collide(player, mover);
+		
 		// Collide with foreground tile layer
 		if (_level.collideWithLevel(player))
 		{
