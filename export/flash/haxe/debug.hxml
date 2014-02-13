@@ -5,8 +5,8 @@
 -cp source
 -D FLX_NO_FOCUS_LOST_SCREEN
 -D tools=1.2.6
+-D FLX_NO_DEBUG
 -D FLX_NO_SOUND_TRAY
--D fdb
 -D web
 -swf-version 11.2
 -swf export/flash/bin/GridMovement.swf

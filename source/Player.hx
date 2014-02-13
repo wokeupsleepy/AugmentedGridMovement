@@ -45,6 +45,16 @@ class Player extends FlxSprite
 		// Make the player graphic.
 		makeGraphic(TILE_SIZE, TILE_SIZE, 0xff843179); //for colors: https://github.com/HaxeFlixel/flixel/blob/dev/flixel/util/FlxColor.hx
 	}
+//error when calling below function --> source/PlayState.hx:39: characters 23-42 : #Player has no field getXPosition
+	public function getXPosition():Float
+	{
+		return x;
+	}
+	
+	public function getYPosition():Float
+	{
+		return y;
+	}
 	
 	override public function update():Void
 	{

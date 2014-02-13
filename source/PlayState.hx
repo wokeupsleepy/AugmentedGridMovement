@@ -36,7 +36,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		// Set and create Txt Howto
 		_howto = new FlxText(0, 225, FlxG.width);
 		_howto.alignment = "center";
-		_howto.text = "Use the ARROW KEYS to move around.";
+		_howto.text = String(Player.getXPosition()); //change this later to reflect X and Y for player
 		_howto.scrollFactor.set(0, 0);
 		add(_howto);
 	}
@@ -45,7 +45,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 	{
 		super.update();
 		
-		FlxG.collide(player, mover);
+		FlxG.collide(player, mover); //this was the bit added to introduce collision to Player and Mover
 		
 		// Collide with foreground tile layer
 		if (_level.collideWithLevel(player))
