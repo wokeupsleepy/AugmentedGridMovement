@@ -14,7 +14,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 	public var player:Player;
 	public var mover:SimpleMover;
 	private var _level:TiledLevel;
-	private var _howto:FlxText;
+	private var bottomText:FlxText;
 	
 	override public function create():Void
 	{
@@ -34,11 +34,11 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		_level.loadObjects(this);
 		
 		// Set and create Txt Howto
-		_howto = new FlxText(0, 225, FlxG.width);
-		_howto.alignment = "center";
-		_howto.text = "default text";
-		_howto.scrollFactor.set(0, 0);
-		add(_howto);
+		bottomText = new FlxText(0, 225, FlxG.width);
+		bottomText.alignment = "center";
+		bottomText.text = "default text";
+		bottomText.scrollFactor.set(0, 0);
+		add(bottomText);
 	}
 	
 	override public function update():Void
@@ -46,10 +46,14 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		super.update();
 			
 		if (player.getXPosition() % 16 == 0 && player.getYPosition() % 16 == 0) {
-			_howto.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16) + ":" + player.getMoveDirection();
+			bottomText.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16) + ":" + player.getMoveDirection();
 		}
 		
-		if (FlxG.collide(player, mover) == true) {
+		/*
+		alright, so the below change prevents them from clipping into each other, but now they stay stuck in the position
+		the solution is to make another check afterward to see if they move apart, i.e. if Math.abs(player.x - mover.x) > 16 --> allows movement
+		*/
+		if ((Math.abs(player.getXPosition() - mover.getXPosition())) <= 16 && ((Math.abs(player.getYPosition() - mover.getYPosition())) <= 16)) {
 			player.moveToNextTile = false;
 			mover.moveToNextTile = false;
 		}
@@ -93,6 +97,6 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		
 		player = null;
 		_level = null;
-		_howto = null;
+		bottomText = null;
 	}
 }

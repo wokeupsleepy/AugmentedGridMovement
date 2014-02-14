@@ -70,9 +70,8 @@ class Player extends FlxSprite
 	{
 		super.update();
 		
-		
 		// Move the player to the next block
-		if (moveToNextTile)
+		if (moveToNextTile == true)
 		{
 			switch(moveDirection)
 			{

@@ -55,6 +55,16 @@ class SimpleMover extends FlxSprite
 	{
 		return y;
 	}
+
+	public function setMoveDirection(inputDirection:MoverMoveDirection):Void
+	{
+		moveDirection = inputDirection;
+	}
+	
+	public function getMoveDirection():MoverMoveDirection
+	{
+		return moveDirection;
+	}
 	
 	override public function update():Void
 	{
