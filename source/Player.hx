@@ -35,7 +35,7 @@ class Player extends FlxSprite
 	/**
 	 * Var used to hold moving direction.
 	 */ 
-	private var moveDirection:MoveDirection;
+	public var moveDirection:MoveDirection;
 	
 	public function new(X:Int, Y:Int)
 	{
@@ -45,7 +45,7 @@ class Player extends FlxSprite
 		// Make the player graphic.
 		makeGraphic(TILE_SIZE, TILE_SIZE, 0xff843179); //for colors: https://github.com/HaxeFlixel/flixel/blob/dev/flixel/util/FlxColor.hx
 	}
-//error when calling below function --> source/PlayState.hx:39: characters 23-42 : #Player has no field getXPosition
+
 	public function getXPosition():Float
 	{
 		return x;
