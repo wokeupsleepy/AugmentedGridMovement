@@ -36,7 +36,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		// Set and create Txt Howto
 		_howto = new FlxText(0, 225, FlxG.width);
 		_howto.alignment = "center";
-		_howto.text = Std.string(player.getXPosition()); //change this later to reflect X and Y for player
+		_howto.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16);
 		_howto.scrollFactor.set(0, 0);
 		add(_howto);
 	}
@@ -44,8 +44,15 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 	override public function update():Void
 	{
 		super.update();
+			
+		if (player.getXPosition() % 16 == 0 && player.getYPosition() % 16 == 0) {
+			_howto.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16);
+		}
 		
-		FlxG.collide(player, mover); //this was the bit added to introduce collision to Player and Mover
+		if (FlxG.collide(player, mover) == true) {
+			player.moveToNextTile = false;
+			mover.moveToNextTile = false;
+		}
 		
 		// Collide with foreground tile layer
 		if (_level.collideWithLevel(player))
@@ -59,7 +66,26 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		{
 			mover.moveToNextTile = false;
 		}
+		
 	}
+
+	/*
+	private function checkProximity():Bool
+	{
+		var proximityBool:Bool = false;
+		
+		if (((player.getXPosition() - mover.getXPosition()) < 2) || (player.getYPosition() - mover.getYPosition()) < 2))
+		{
+			proximityBool = true;
+		}
+		else
+		{
+			proximityBool = false;
+		}
+		
+		return proximityBool;
+	}
+	*/
 	
 	override public function destroy():Void
 	{
