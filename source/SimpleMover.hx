@@ -46,6 +46,16 @@ class SimpleMover extends FlxSprite
 		makeGraphic(TILE_SIZE, TILE_SIZE, 0xffff7f50); //for colors: https://github.com/HaxeFlixel/flixel/blob/dev/flixel/util/FlxColor.hx
 	}
 	
+	public function getXPosition():Float
+	{
+		return x;
+	}
+	
+	public function getYPosition():Float
+	{
+		return y;
+	}
+	
 	override public function update():Void
 	{
 		super.update();  
@@ -72,7 +82,6 @@ class SimpleMover extends FlxSprite
 			moveToNextTile = false;
 		}
 		
-		// Check for WASD or arrow key presses and move accordingly
 		if (FlxG.keyboard.pressed("N"))
 		{
 			moveTo(MoverMoveDirection.LEFT);
