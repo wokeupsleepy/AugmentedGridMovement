@@ -35,7 +35,7 @@ class Player extends FlxSprite
 	/**
 	 * Var used to hold moving direction.
 	 */ 
-	public var moveDirection:MoveDirection;
+	private var moveDirection:MoveDirection;
 	
 	public function new(X:Int, Y:Int)
 	{
@@ -56,9 +56,20 @@ class Player extends FlxSprite
 		return y;
 	}
 	
+	public function setMoveDirection(inputDirection:MoveDirection):Void
+	{
+		moveDirection = inputDirection;
+	}
+	
+	public function getMoveDirection():MoveDirection
+	{
+		return moveDirection;
+	}
+	
 	override public function update():Void
 	{
-		super.update();  
+		super.update();
+		
 		
 		// Move the player to the next block
 		if (moveToNextTile)

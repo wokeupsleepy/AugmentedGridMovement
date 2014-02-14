@@ -1,0 +1,15 @@
+-main ApplicationMain 
+-lib openfl
+-lib flixel
+-lib flixel-addons
+-cp source
+-D FLX_NO_FOCUS_LOST_SCREEN
+-D tools=1.2.6
+-D FLX_NO_SOUND_TRAY
+-D fdb
+-D web
+-swf-version 11.2
+-swf export/flash/bin/GridMovement.swf
+-swf-header 672:480:60:FFFFFF
+-cp export/flash/haxe
+#--remap nme:flash

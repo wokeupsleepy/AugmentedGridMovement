@@ -36,7 +36,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		// Set and create Txt Howto
 		_howto = new FlxText(0, 225, FlxG.width);
 		_howto.alignment = "center";
-		_howto.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16);
+		_howto.text = "default text";
 		_howto.scrollFactor.set(0, 0);
 		add(_howto);
 	}
@@ -46,7 +46,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		super.update();
 			
 		if (player.getXPosition() % 16 == 0 && player.getYPosition() % 16 == 0) {
-			_howto.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16);
+			_howto.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16) + ":" + player.getMoveDirection();
 		}
 		
 		if (FlxG.collide(player, mover) == true) {
