@@ -25,7 +25,7 @@ class TiledLevel extends TiledMap
 	
 	public var foregroundTiles:FlxGroup;
 	public var backgroundTiles:FlxGroup;
-	public var player:Player;
+	public var player:CustomTiledMover;
 	
 	//this is new:
 	//public var mover:SimpleMover;
@@ -112,7 +112,7 @@ class TiledLevel extends TiledMap
 		{
 			case "player_start": //change to "mover_start" (map.tmx)--> changes starting position, good for SimpleMover
 				// define and set the player 
-				var player = new Player(x, y);
+				var player = new CustomTiledMover(x, y);
 				state.player = player;
 				state.add(player);
 				

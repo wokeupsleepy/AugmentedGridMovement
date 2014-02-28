@@ -2,18 +2,12 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import MoveDirEnum;
 
 /**
  * ...
  * @author .:Tom Fang:.
  */
-enum MoverMoveDirection
-{
-	UP;
-	DOWN;
-	LEFT;
-	RIGHT;
-}
 
 class SimpleMover extends FlxSprite
 {
@@ -35,7 +29,7 @@ class SimpleMover extends FlxSprite
 	/**
 	 * Var used to hold moving direction.
 	 */ 
-	private var moveDirection:MoverMoveDirection;
+	private var moveDirection:MoveDirection;
 	
 	public function new(X:Int, Y:Int)
 	{
@@ -56,12 +50,12 @@ class SimpleMover extends FlxSprite
 		return y;
 	}
 
-	public function setMoveDirection(inputDirection:MoverMoveDirection):Void
+	public function setMoveDirection(inputDirection:MoveDirection):Void
 	{
 		moveDirection = inputDirection;
 	}
 	
-	public function getMoveDirection():MoverMoveDirection
+	public function getMoveDirection():MoveDirection
 	{
 		return moveDirection;
 	}
@@ -92,18 +86,18 @@ class SimpleMover extends FlxSprite
 			moveToNextTile = false;
 		}
 		
-		if (FlxG.keyboard.pressed("N"))
+		if (FlxG.keys.anyPressed(["LBRACKET"]))
 		{
-			moveTo(MoverMoveDirection.LEFT);
+			moveTo(MoveDirection.LEFT);
 		}
 		
-		else if (FlxG.keyboard.pressed("M"))
+		else if (FlxG.keys.anyPressed(["RBRACKET"]))
 		{
-			moveTo(MoverMoveDirection.RIGHT);
+			moveTo(MoveDirection.RIGHT);
 		}
 	}
 	
-	public function moveTo(Direction:MoverMoveDirection):Void
+	public function moveTo(Direction:MoveDirection):Void
 	{
 		// Only change direction if not already moving
 		if (!moveToNextTile)

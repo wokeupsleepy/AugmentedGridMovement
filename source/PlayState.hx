@@ -11,10 +11,11 @@ import flixel.text.FlxText;
 class PlayState extends FlxState //a FlxState for every menu and level, think of it as a one continuous "screen"
 //does this allows Mario-type scrolling?
 {
-	public var player:Player;
+	public var player:CustomTiledMover;
 	public var mover:SimpleMover;
 	private var _level:TiledLevel;
 	private var bottomText:FlxText;
+	private var inProximity:Bool;
 	
 	override public function create():Void
 	{
@@ -39,6 +40,7 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		bottomText.text = "default text";
 		bottomText.scrollFactor.set(0, 0);
 		add(bottomText);
+		inProximity = false;
 	}
 	
 	override public function update():Void
@@ -46,17 +48,24 @@ class PlayState extends FlxState //a FlxState for every menu and level, think of
 		super.update();
 			
 		if (player.getXPosition() % 16 == 0 && player.getYPosition() % 16 == 0) {
-			bottomText.text = Std.string(player.getXPosition()/16) + ":"+ Std.string(player.getYPosition()/16) + ":" + player.getMoveDirection();
+			bottomText.text = Std.string(player.getXPosition() / 16) + ":" + Std.string(player.getYPosition() / 16) +
+			":" + player.getMoveDirection() + "  Moving?:" + player.moveToNextTile + "  Proximity?:" + inProximity;
 		}
 		
 		/*
 		alright, so the below change prevents them from clipping into each other, but now they stay stuck in the position
 		the solution is to make another check afterward to see if they move apart, i.e. if Math.abs(player.x - mover.x) > 16 --> allows movement
 		*/
+		
 		if ((Math.abs(player.getXPosition() - mover.getXPosition())) <= 16 && ((Math.abs(player.getYPosition() - mover.getYPosition())) <= 16)) {
+			inProximity = true;
+		}
+		
+		if (inProximity == true) {
 			player.moveToNextTile = false;
 			mover.moveToNextTile = false;
 		}
+		
 		
 		// Collide with foreground tile layer
 		if (_level.collideWithLevel(player))

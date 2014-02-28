@@ -1,6 +1,7 @@
 -main ApplicationMain 
 -lib openfl
 -lib flixel
+-lib openfl
 -lib flixel-addons
 -cp source
 -D FLX_NO_FOCUS_LOST_SCREEN
